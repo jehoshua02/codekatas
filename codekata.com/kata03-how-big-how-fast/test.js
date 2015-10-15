@@ -1,4 +1,5 @@
-var bits = require('./');
+var bits = require('./').bits;
+var contactsSpace = require('./').contactsSpace;
 
 describe('bits', function () {
 
@@ -68,6 +69,14 @@ describe('bits', function () {
 
   it('should return 43 for 8,000,000,000,000', function () {
     bits(8000000000000).should.equal(43);
+  });
+
+});
+
+describe('contactsSpace', function () {
+
+  it('should return 3840000 for 20,000', function () {
+    contactsSpace(20000).should.equal(3840000);
   });
 
 });
