@@ -3,8 +3,6 @@ module.exports = function chop(needle, haystack) {
     return -1;
   }
 
-  var limit = 20;
-  var i = 0;
   var minIndex = 0;
   var maxIndex = haystack.length - 1;
   var index, item;
