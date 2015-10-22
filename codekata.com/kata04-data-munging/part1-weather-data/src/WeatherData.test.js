@@ -26,4 +26,28 @@ describe('WeatherData', function () {
       });
     });
   });
+  describe('dayWithLargestSpread', function () {
+    it('should return day with largest spread', function () {
+      var data = new WeatherData(path.resolve(__dirname, './WeatherData.test.dat'));
+      return data.dayWithLargestSpread().should.eventually.become({
+        '1HrP': '',
+        'AvDP': '61.5',
+        'AvSLP': '1018.6',
+        'AvSp': '7.6',
+        'Dir': '220',
+        'HDDay': '6',
+        'MnR': '46',
+        'MxR': '78',
+        'MxS': '12',
+        'PDir': '240',
+        'SkyC': '6.0',
+        'TPcpn': '0.00',
+        'WxType': '',
+        'avgTemp': '59',
+        'maxTemp': '86',
+        'minTemp': '32*',
+        'number': '9',
+      });
+    });
+  });
 });

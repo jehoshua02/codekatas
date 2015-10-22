@@ -42,6 +42,43 @@ WeatherData.prototype.dayWithSmallestSpread = function () {
   }.bind(this));
 };
 
+WeatherData.prototype.dayWithLargestSpread = function () {
+  return new Promise(function (resolve, reject) {
+    var day = null;
+    var headerSeen = false;
+
+    var rl = readline.createInterface({
+      input: require('fs').createReadStream(this.filename)
+    });
+
+    rl.on('line', function (line) {
+      if (!headerSeen) {
+        headerSeen = true;
+        return;
+      }
+
+      if (line.trim() === '') {
+        return;
+      }
+
+      var current = this.parseDay(line);
+
+      if (day === null) {
+        day = current;
+        return;
+      }
+
+      if (this.tempSpread(current) > this.tempSpread(day)) {
+        day = current;
+      }
+    }.bind(this));
+
+    rl.on('close', function () {
+      resolve(day);
+    });
+  }.bind(this));
+};
+
 WeatherData.prototype.parseDay = function (line) {
   var day = {};
   var offset = 0;
