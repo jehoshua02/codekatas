@@ -6,43 +6,18 @@ function WeatherData(filename) {
 }
 
 WeatherData.prototype.dayWithSmallestSpread = function () {
-  return new Promise(function (resolve, reject) {
-    var day = null;
-    var headerSeen = false;
-
-    var rl = readline.createInterface({
-      input: require('fs').createReadStream(this.filename)
-    });
-
-    rl.on('line', function (line) {
-      if (!headerSeen) {
-        headerSeen = true;
-        return;
-      }
-
-      if (line.trim() === '') {
-        return;
-      }
-
-      var current = this.parseDay(line);
-
-      if (day === null) {
-        day = current;
-        return;
-      }
-
-      if (this.tempSpread(current) < this.tempSpread(day)) {
-        day = current;
-      }
-    }.bind(this));
-
-    rl.on('close', function () {
-      resolve(day);
-    });
+  return this.findByCompare(function (prev, next) {
+    return this.tempSpread(next) < this.tempSpread(prev) ? 1 : -1;
   }.bind(this));
 };
 
 WeatherData.prototype.dayWithLargestSpread = function () {
+  return this.findByCompare(function (prev, next) {
+    return this.tempSpread(next) > this.tempSpread(prev) ? 1 : -1;
+  }.bind(this));
+};
+
+WeatherData.prototype.findByCompare = function (comparator) {
   return new Promise(function (resolve, reject) {
     var day = null;
     var headerSeen = false;
@@ -68,7 +43,7 @@ WeatherData.prototype.dayWithLargestSpread = function () {
         return;
       }
 
-      if (this.tempSpread(current) > this.tempSpread(day)) {
+      if (comparator(day, current) > 0) {
         day = current;
       }
     }.bind(this));
