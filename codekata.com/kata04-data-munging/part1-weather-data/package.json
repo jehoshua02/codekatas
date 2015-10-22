@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require should ./src/**/*.test.js"
+    "test": "mocha --require ./src/test-bootstrap ./src/**/*.test.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^2.3.3",
-    "should": "^7.1.1"
+    "chai": "^3.4.0",
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^2.3.3"
   }
 }
