@@ -1,0 +1,16 @@
+{
+  "name": "dat-reader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require ./src/test-bootstrap ./src/**/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^2.3.3"
+  }
+}
