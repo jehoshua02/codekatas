@@ -13,7 +13,6 @@ describe('lines', function () {
     ];
 
     var actual = [];
-    console.log(path.resolve(__dirname, './lines.test.data.txt'));
     lines({
       filename: path.resolve(__dirname, './lines.test.data.txt'),
       line: function (line) {
