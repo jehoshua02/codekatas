@@ -2,7 +2,7 @@
   "name": "lines",
   "version": "1.0.0",
   "description": "",
-  "main": "FileReader.js",
+  "main": "./src/lines.js",
   "scripts": {
     "test": "mocha --require ./src/test-bootstrap ./src/**/*.test.js"
   },
@@ -14,7 +14,6 @@
     "mocha": "^2.3.3"
   },
   "dependencies": {
-    "bluebird": "^3.0.1",
     "object-assign": "^4.0.1"
   }
 }

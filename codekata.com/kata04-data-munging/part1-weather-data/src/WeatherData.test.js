@@ -9,12 +9,12 @@ describe('WeatherData', function () {
         'number': '30',
         'minTemp': '89',
         'maxTemp': '90',
-        '1HrP': '',
+        '1HrP': null,
         'AvDP': '63.6',
         'AvSLP': '1022.7',
         'AvSp': '6.0',
         'Dir': '220',
-        'HDDay': '',
+        'HDDay': null,
         'MnR': '41',
         'MxR': '200',
         'MxS': '17',
@@ -30,7 +30,7 @@ describe('WeatherData', function () {
     it('should return day with largest spread', function () {
       var data = new WeatherData(path.resolve(__dirname, './WeatherData.test.dat'));
       return data.dayWithLargestSpread().should.eventually.become({
-        '1HrP': '',
+        '1HrP': null,
         'AvDP': '61.5',
         'AvSLP': '1018.6',
         'AvSp': '7.6',
@@ -42,7 +42,7 @@ describe('WeatherData', function () {
         'PDir': '240',
         'SkyC': '6.0',
         'TPcpn': '0.00',
-        'WxType': '',
+        'WxType': null,
         'avgTemp': '59',
         'maxTemp': '86',
         'minTemp': '32*',

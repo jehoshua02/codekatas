@@ -1,8 +1,8 @@
 {
-  "name": "dat-reader",
+  "name": "parse-dat",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/parseDat.js",
   "scripts": {
     "test": "mocha --require ./src/test-bootstrap ./src/**/*.test.js"
   },
