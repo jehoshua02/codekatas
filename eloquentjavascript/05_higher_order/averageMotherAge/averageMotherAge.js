@@ -1,3 +1,5 @@
+var average = require('../lib/average');
+
 module.exports = function averageMotherAge(ancestry) {
   var byName = indexByName(ancestry);
 
@@ -11,11 +13,6 @@ module.exports = function averageMotherAge(ancestry) {
 function motherAgeAtChildBirth(lookup, person) {
   var mother = lookup(person.mother);
   return person.born - mother.born;
-}
-
-function average(array) {
-  function plus(a, b) { return a + b; }
-  return array.reduce(plus) / array.length;
 }
 
 function indexByName(ancestry) {
