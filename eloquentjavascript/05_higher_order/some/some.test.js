@@ -9,9 +9,3 @@ describe('some', function () {
     some([2, 3, 4], isNaN).should.be.false;
   });
 });
-
-
-console.log();
-// → true
-console.log();
-// → false
