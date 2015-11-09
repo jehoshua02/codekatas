@@ -4,7 +4,7 @@
   "description": "Exercises from Eloquent Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ./test-bootstrap ./**/*.test.js"
+    "test": "mocha --require ./test-bootstrap \"./**/*.test.js\""
   },
   "author": "",
   "license": "ISC",
