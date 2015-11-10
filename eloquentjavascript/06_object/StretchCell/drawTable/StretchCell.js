@@ -15,14 +15,7 @@ StretchCell.prototype.minHeight = function() {
 };
 
 StretchCell.prototype.draw = function(width, height) {
-  var line = repeat(' ', width);
-  var lines = this.inner.draw(width, height);
-
-  while (lines.length < height) {
-    lines.push(line);
-  }
-
-  return lines;
+  return this.inner.draw(width, height);
 };
 
 module.exports = StretchCell;
