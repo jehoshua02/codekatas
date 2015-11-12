@@ -4,7 +4,7 @@
   "description": "Exercises from Eloquent Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ./test-bootstrap \"./**/*.test.js\""
+    "test": "mocha --require ./test-bootstrap $(find . -type f -name \"*.test.js\" ! -path \"./node_modules/*\")"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "mocha": "^2.3.3",
+    "proxyquire": "^1.7.3",
     "sinon": "^1.17.2"
   }
 }
