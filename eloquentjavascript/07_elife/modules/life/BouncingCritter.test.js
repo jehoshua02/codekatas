@@ -1,6 +1,4 @@
 var proxyquire = require('proxyquire');
-var stubs = {};
-var Critter = proxyquire('./BouncingCritter', stubs);
 
 describe('BouncingCritter', function () {
   describe('act', function () {
@@ -21,9 +19,10 @@ describe('BouncingCritter', function () {
         expected: 'n' /* 4 */
       };
 
+      var stubs = {};
+
       // mock out randomElement
-      stubs.randomElement = function () {
-        console.log('randomElement');
+      stubs['../randomElement'] = function () {
         return scenario.input.direction;
       };
 
@@ -34,7 +33,7 @@ describe('BouncingCritter', function () {
       };
 
       // Act
-
+      var Critter = proxyquire('./BouncingCritter', stubs);
       var critter = new Critter;
       var actual = critter.act(view);
 
