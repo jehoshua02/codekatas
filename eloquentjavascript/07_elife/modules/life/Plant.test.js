@@ -2,6 +2,7 @@ var Plant = require('./Plant');
 
 describe('Plant', function () {
   describe('act', function () {
+
     it('should grow', scenario({
       input: {energy: 15, find: 'n'}, expected: {type: 'grow'}
     }));
