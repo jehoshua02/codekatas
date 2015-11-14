@@ -2,45 +2,44 @@ var proxyquire = require('proxyquire');
 
 describe('BouncingCritter', function () {
   describe('act', function () {
-    it('should keep going straight while no obstacle', function () {
-      // 1. Mock out randomElement(directionNames) to return desired direction.
-      // 2. Mock out view.look to return desired symbol.
-      // 3. Mock out view.find to return desired direction.
-      // 4. Assert expected action is returned.
 
-      // Arrange
+    it('should go straight while there are no obstacles', scenario({
+      input: {direction: 'n', look: ' ', find: 'n'}, expected: 'n'
+    }));
 
-      var scenario = {
-        input: {
-          direction: 'n', /* 1 */
-          look: ' ', /* 2 */
-          find: 'n', /* 3 */
-        },
-        expected: 'n' /* 4 */
-      };
+    it('should turn when obstacle is encountered', scenario({
+      input: {direction: 'n', look: '#', find: 'e'}, expected: 'e'
+    }));
 
-      var stubs = {};
+    function scenario(data) {
+      return function () {
+        // Arrange
 
-      // mock out randomElement
-      stubs['../randomElement'] = function () {
-        return scenario.input.direction;
-      };
+        var stubs = {};
 
-      // mock out view
-      var view = {
-        look: function () { return scenario.input.look; },
-        find: function () { return scenario.input.find; }
-      };
+        // mock out randomElement
+        stubs['../randomElement'] = function () {
+          return data.input.direction;
+        };
 
-      // Act
-      var Critter = proxyquire('./BouncingCritter', stubs);
-      var critter = new Critter;
-      var actual = critter.act(view);
+        // mock out view
+        var view = {
+          look: function () { return data.input.look; },
+          find: function () { return data.input.find; }
+        };
 
-      // Assert
+        // Act
 
-      actual.type.should.equal('move');
-      actual.direction.should.eql(scenario.expected);
-    });
+        var Critter = proxyquire('./BouncingCritter', stubs);
+        var critter = new Critter;
+        var actual = critter.act(view);
+
+        // Assert
+
+        actual.type.should.equal('move');
+        actual.direction.should.eql(data.expected);
+      }
+    }
+
   });
 });
