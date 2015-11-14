@@ -1,4 +1,4 @@
-module.exports = function PlantEater() {
+function PlantEater() {
   this.energy = 20;
 }
 
@@ -12,3 +12,5 @@ PlantEater.prototype.act = function(view) {
   if (space)
     return {type: "move", direction: space};
 };
+
+module.exports = PlantEater;
