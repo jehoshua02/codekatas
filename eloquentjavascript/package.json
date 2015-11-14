@@ -4,7 +4,7 @@
   "description": "Exercises from Eloquent Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ./test-bootstrap $(find . -type f -name \"*.test.js\" ! -path \"./node_modules/*\")"
+    "test": "mocha --require ./test-bootstrap $(find . -type f -name '*.test.js' ! -path './node_modules/*')"
   },
   "author": "",
   "license": "ISC",
