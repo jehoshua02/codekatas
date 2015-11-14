@@ -1,4 +1,4 @@
-module.exports = function Plant() {
+function Plant() {
   this.energy = 3 + Math.random() * 4;
 }
 
@@ -11,3 +11,5 @@ Plant.prototype.act = function(view) {
   if (this.energy < 20)
     return {type: "grow"};
 };
+
+module.exports = Plant;
