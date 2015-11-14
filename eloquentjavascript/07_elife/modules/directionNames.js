@@ -1,1 +1,1 @@
-var directionNames = "n ne e se s sw w nw".split(" ");
+module.exports = "n ne e se s sw w nw".split(" ");
