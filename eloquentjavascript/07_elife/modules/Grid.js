@@ -1,3 +1,5 @@
+var Vector = require('./Vector');
+
 function Grid(width, height) {
   this.space = new Array(width * height);
   this.width = width;
@@ -22,3 +24,5 @@ Grid.prototype.forEach = function(f, context) {
     }
   }
 };
+
+module.exports = Grid;
