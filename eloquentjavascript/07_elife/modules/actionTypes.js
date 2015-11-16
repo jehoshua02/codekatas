@@ -1,4 +1,4 @@
-var actionTypes = module.exports = Object.create(null);
+var actionTypes = Object.create(null);
 
 actionTypes.grow = function(critter) {
   critter.energy += 0.5;
@@ -7,6 +7,11 @@ actionTypes.grow = function(critter) {
 
 actionTypes.move = function(critter, vector, action) {
   var dest = this.checkDestination(action, vector);
+
+  var destEmpty = dest == null;
+  var sufficientEnergy = critter.energy > 1;
+  var validDest = this.grid.get(dest) != null;
+
   if (dest == null ||
       critter.energy <= 1 ||
       this.grid.get(dest) != null)
@@ -39,3 +44,5 @@ actionTypes.reproduce = function(critter, vector, action) {
   this.grid.set(dest, baby);
   return true;
 };
+
+module.exports = actionTypes;
