@@ -1,3 +1,6 @@
+var World = require('./World');
+var actionTypes = require('./actionTypes');
+
 module.exports = function LifelikeWorld(map, legend) {
   World.call(this, map, legend);
 }
