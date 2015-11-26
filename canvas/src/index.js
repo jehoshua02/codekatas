@@ -8,4 +8,4 @@ container.id = 'app';
 document.body.appendChild(container);
 
 // render
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, container);

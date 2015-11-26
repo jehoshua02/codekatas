@@ -28,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new HtmlPlugin({
-      title: 'Canvas Code Kata',
+      title: 'React App',
       favicon: './src/favicon.png'
     }),
     new NotifierPlugin({
