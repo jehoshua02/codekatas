@@ -4,6 +4,7 @@ var NotifierPlugin = require('webpack-notifier');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   entry: {
     index: './src/index.js'
   },
