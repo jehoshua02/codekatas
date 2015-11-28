@@ -12,9 +12,7 @@ function loop(action) {
 var KaitlynCanvas = React.createClass({
   render: function () {
     return (
-      <canvas id="canvas" width='600' height='600' style={{
-        backgroundColor: '#333',
-      }}></canvas>
+      <canvas id="canvas" width='600' height='600' style={{backgroundColor: '#333'}}></canvas>
     );
   },
 
