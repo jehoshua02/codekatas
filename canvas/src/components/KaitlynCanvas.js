@@ -3,15 +3,14 @@ var ReactDOM = require('react-dom');
 var canvas = require('lib/canvas');
 
 function loop(action) {
-  setInterval(function () {
+  window.requestAnimationFrame(function () {
     action();
-    // loop(action);
-  }, 33);
+    loop(action);
+  });
 }
 
 var KaitlynCanvas = React.createClass({
   render: function () {
-    console.log(document.body.computed, document.body.height);
     return (
       <canvas id="canvas" width='600' height='600' style={{
         backgroundColor: '#333',
@@ -109,8 +108,7 @@ var KaitlynCanvas = React.createClass({
     bear.angle = angle;
     this.bear = bear;
 
-    var context = node.getContext('2d');
-    context.drawImage(bear.img, bear.origin.x, bear.origin.y, bear.img.width, bear.img.height);
+    node.getContext('2d').drawImage(bear.img, bear.origin.x, bear.origin.y, bear.img.width, bear.img.height);
   },
 
   _center: function () {
