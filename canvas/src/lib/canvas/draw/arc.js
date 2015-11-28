@@ -1,4 +1,5 @@
 var _context = require('../util/context');
+var style = require('../util/style');
 
 module.exports = function (node, props) {
   var context = _context(node);
@@ -9,7 +10,15 @@ module.exports = function (node, props) {
   var end = props.end * 2 * Math.PI;
   var clockwise = props.clockwise || true;
 
+  style(context, props);
   context.beginPath();
   context.arc(x, y, radius, start, end, !clockwise);
-  context.stroke();
+
+  if (props.fillStyle) {
+    context.fill();
+  }
+
+  if (props.stroke) {
+    context.stroke();
+  }
 }

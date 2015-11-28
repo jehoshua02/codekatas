@@ -67,15 +67,17 @@ var BasicCanvasExamples = React.createClass({
       center: {x: 95, y: 50},
       radius: 40,
       start: 0,
-      end: 1
+      end: 1,
+      stroke: true
     });
   },
 
   _drawText: function () {
     canvas.draw.text(this._node(), {
       text: 'Hello World',
-      origin: {x: 22, y: 60},
+      origin: {x: this._width() / 2, y: this._height() / 2},
       font: '30px Arial',
+      textAlign: 'center',
       fillStyle: '#fff'
     });
   },
@@ -83,8 +85,9 @@ var BasicCanvasExamples = React.createClass({
   _drawStrokeText: function () {
     canvas.draw.text(this._node(), {
       text: 'Hello World',
-      origin: {x: 22, y: 60},
+      origin: {x: this._width() / 2, y: this._height() / 2},
       font: '30px Arial',
+      textAlign: 'center',
       stroke: true
     });
   },
