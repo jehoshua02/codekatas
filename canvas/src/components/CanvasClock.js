@@ -2,6 +2,13 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var canvas = require('lib/canvas');
 
+function loop(action) {
+  window.requestAnimationFrame(function () {
+    action();
+    loop(action);
+  });
+}
+
 var CanvasClock = React.createClass({
   render: function () {
     return (
@@ -10,7 +17,7 @@ var CanvasClock = React.createClass({
   },
 
   componentDidMount: function () {
-    setInterval(this._draw, 33);
+    loop(this._draw);
   },
 
   _draw: function () {
