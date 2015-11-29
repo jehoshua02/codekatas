@@ -2,11 +2,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var CubeCanvas = React.createClass({
-  getInitialState: function () {
-    return {
-      color: 'hotpink'
-    };
-  },
   render: function () {
     return (
       <canvas ref="canvas" width='800' height='600' style={{backgroundColor: '#333'}}
@@ -22,30 +17,49 @@ var CubeCanvas = React.createClass({
   },
 
   _handleMouseMove: function (e) {
+    if (!this.drag) {return;}
+    if (!this.data) {return;}
+    var previous = this.drag;
+    var next = this._eventCoords(e);
     var canvas = this.data.canvas;
-    var x = (e.clientX - e.target.offsetLeft - canvas.width() / 2);
-    var y = (e.clientY - e.target.offsetTop - canvas.height() / 2) * -1;
-    var percentX = 1 - (y / (canvas.height() / 2));
-    var percentY = 1 - (x / (canvas.width() / 2));
+    var rotateX = 1 - ((next.y - previous.y) / canvas.height() / 2);
+    var rotateY = 1 - ((next.x - previous.x) / canvas.width() / 2);
 
-    if (this.dragging) {
-      this.data.cube.rotate(percentX, percentY, 0);
-    }
+    this.data.rotate[0] += rotateX * 2;
+    this.data.rotate[1] += rotateY * 2;
+    this.drag = next;
   },
 
   _handleMouseDown: function (e) {
-    this.dragging = true;
+    var point = this._eventCoords(e);
+    this.drag = point;
   },
 
   _handleMouseUp: function (e) {
-    this.dragging = false;
+    this.drag = null;
+  },
+
+  _eventCoords: function (e) {
+    var canvas = this.data.canvas;
+    var x = (e.clientX - e.target.offsetLeft - canvas.width() / 2);
+    var y = (e.clientY - e.target.offsetTop - canvas.height() / 2) * -1;
+    return {x: x, y: y};
   },
 
   _draw: function () {
     // bootstrap
     this.data = this.data || {};
     var cube = this.data.cube || new Cube;
+    var rotate = this.data.rotate || [0, 0, 0];
     var canvas = this.data.canvas || new Canvas(this.refs.canvas);
+
+    // rotate
+    if (!this.drag) {
+      rotate = rotate.map(function (angle, index) {
+        return index === 2 ? angle : angle + 0.005;
+      });
+    }
+    cube.rotate.apply(cube, rotate);
 
     // render
     canvas.clear();
@@ -54,6 +68,7 @@ var CubeCanvas = React.createClass({
     // persist
     this.data = {
       cube: cube,
+      rotate: rotate,
       canvas: canvas,
     };
   }
@@ -139,7 +154,9 @@ function Cube() {
 }
 
 Cube.prototype.rotate = function (angleX, angleY, angleZ) {
-  this._rotate = arguments;
+  this._rotate[0] = angleX;
+  this._rotate[1] = angleY;
+  this._rotate[2] = angleZ;
 }
 
 Cube.prototype.render = function (canvas) {
