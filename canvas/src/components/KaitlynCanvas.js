@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var canvas = require('lib/canvas');
+var randomColor = require('lib/randomColor');
 
 function loop(action) {
   window.requestAnimationFrame(function () {
@@ -38,7 +39,7 @@ var KaitlynCanvas = React.createClass({
         radius: radius,
         angle: this._percentToRadian(angles[0])
       }),
-      strokeStyle: this._randomColor(),
+      strokeStyle: randomColor(),
       lineWidth: center.x * 0.02,
       lineCap: 'round',
     });
@@ -50,7 +51,7 @@ var KaitlynCanvas = React.createClass({
         radius: radius,
         angle: this._percentToRadian(1 - angles[1])
       }),
-      strokeStyle: this._randomColor(),
+      strokeStyle: randomColor(),
       lineWidth: center.x * 0.02,
       lineCap: 'round',
     });
@@ -60,7 +61,7 @@ var KaitlynCanvas = React.createClass({
       radius: 10,
       start: 0,
       end: 1,
-      fillStyle: this._randomColor(),
+      fillStyle: randomColor(),
     });
 
 
@@ -129,10 +130,6 @@ var KaitlynCanvas = React.createClass({
 
   _percentToRadian: function (percent) {
     return percent * 2 * Math.PI;
-  },
-
-  _randomColor: function () {
-    return '#'+Math.floor(Math.random()*16777215).toString(16);
   },
 
   _node: function () {

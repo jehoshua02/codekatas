@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var randomColor = require('lib/randomColor');
 
 var CubeCanvas = React.createClass({
   render: function () {
@@ -167,18 +168,30 @@ Cube.prototype.render = function (canvas) {
     return point.rotate.apply(point, this._rotate).project(width, height, 300, 3.5);
   }.bind(this));
 
-  context.strokeStyle = 'lime';
-
   for (var i = 0; i < this.faces.length; i++) {
     var face = this.faces[i];
-    context.beginPath();
-    context.moveTo(points[face[0]].x, points[face[0]].y);
-    context.lineTo(points[face[1]].x, points[face[1]].y);
-    context.lineTo(points[face[2]].x, points[face[2]].y);
-    context.lineTo(points[face[3]].x, points[face[3]].y);
-    context.closePath();
-    context.stroke();
+
+    new Line(points[face[0]], points[face[1]]).render(canvas);
+    new Line(points[face[1]], points[face[2]]).render(canvas);
+    new Line(points[face[2]], points[face[3]]).render(canvas);
+    new Line(points[face[3]], points[face[0]]).render(canvas);
   }
+}
+
+function Line(a, b) {
+  this.a = a;
+  this.b = b;
+}
+
+Line.prototype.render = function (canvas) {
+  var context = canvas.context();
+  context.strokeStyle = randomColor();
+  context.lineWidth = 10;
+  context.lineCap = 'round';
+  context.beginPath();
+  context.moveTo(this.a.x, this.a.y);
+  context.lineTo(this.b.x, this.b.y);
+  context.stroke();
 }
 
 function Canvas(node) {
